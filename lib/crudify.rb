@@ -1,0 +1,3 @@
+module Crudify
+  # Your code goes here...
+end
