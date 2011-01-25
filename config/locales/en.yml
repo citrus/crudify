@@ -1,0 +1,8 @@
+en:
+  crudify:
+    created: %{what} was successfully created.
+    updated: %{what} was successfully updated.
+    destroyed: %{what} was successfully removed. 
+    failed_create: %{what} could not be created. 
+    failed_update: %{what} could not be updated. 
+    failed_destroy: %{what} could not be removed. 
