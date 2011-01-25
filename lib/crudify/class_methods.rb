@@ -4,10 +4,12 @@ module Crudify
     
      def crudify(model_name, options = {})
        options = ::Crudify::Base.default_options(model_name).merge(options)
-  
+       
        singular_name = model_name.to_s
        class_name = singular_name.camelize
        plural_name = singular_name.pluralize
+       
+       options[:paging] = (options[:paging] && eval(class_name).respond_to?(:paginate))
   
        module_eval %(
        
@@ -154,7 +156,7 @@ module Crudify
            )
          end
        else
-         if options[:paging] && eval(class_name).respond_to?(:paginate)
+         if options[:paging]
            module_eval %(
              def index
                paginate_all_#{plural_name}
