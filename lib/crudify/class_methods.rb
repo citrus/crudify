@@ -118,7 +118,7 @@ module Crudify
            set_collection(@#{plural_name}.paginate(paging_options), false)
          end
   
-         # Returns a weighted set of results based on the query specified by the user.
+         # Returns results based on the query specified by the user.
          def search_all_#{plural_name}
            @search ||= find_all_#{plural_name}.search(params[:search])
            set_collection(@search, false)
@@ -154,7 +154,7 @@ module Crudify
            )
          end
        else
-         if options[:paging]
+         if options[:paging] && eval(class_name).respond_to?(:paginate)
            module_eval %(
              def index
                paginate_all_#{plural_name}
