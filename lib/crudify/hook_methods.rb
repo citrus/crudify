@@ -26,7 +26,7 @@ module Crudify
       def before_action
         # just a hook!
         puts "> Crud::before_action"
-        @what = @instance.send(@crud_options[:title_attribute].to_sym).inspect
+        @what = @crud_options[:use_class_name_as_title] ? @instance.class.to_s.humanize : @instance.send(@crud_options[:title_attribute].to_sym).inspect
         true
       end
       

@@ -20,6 +20,7 @@ module Crudify
       this_class = class_name.constantize
       {
         :title_attribute => "title",
+        :use_class_name_as_title => false,
         :order => ('position ASC' if this_class.table_exists? and this_class.column_names.include?('position')),
         :conditions => '',
         :sortable => true,
