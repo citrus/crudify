@@ -1,0 +1,20 @@
+<%= link_to "<em>create</em> a new jelly".html_safe, new_jelly_path %>
+
+<% if @jellies.empty? %>
+  to start your adventure. 
+<% else %>
+  or 
+  <ul class="items">
+    <% @jellies.each do |jelly| %>
+      <li>
+        <span>
+          <%= link_to content_tag(:em, "read"), jelly_path(jelly) %>, 
+          <%= link_to content_tag(:em, "update"), edit_jelly_path(jelly) %> or 
+          <%= link_to content_tag(:em, "delete"), jelly_path(jelly), :method => :delete, :confirm => "Are you sure?" %>
+        </span>
+        jelly named <b><%= jelly.name %></b>
+      </li>
+    <% end %>
+  </ul>
+  <p>So much jelly, <strike>so little time</strike> and time to eat it too.</p>
+<% end %>

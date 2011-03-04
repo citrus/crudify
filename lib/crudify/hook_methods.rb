@@ -6,34 +6,33 @@ module Crudify
       
       def before_create
         # just a hook!
-        puts "> Crud::before_create"
+        puts "> Crud::before_create" if @crud_options[:log]
         before_action
       end    
         
       def before_update
         # just a hook!
-        puts "> Crud::before_update"
+        puts "> Crud::before_update" if @crud_options[:log]
         before_action
       end    
         
       def before_destroy
         # just a hook!
-        puts "> Crud::before_destroy"
+        puts "> Crud::before_destroy" if @crud_options[:log]
         before_action
       end
-      
-      
+            
       def before_action
         # just a hook!
-        puts "> Crud::before_action"
-        @what = @crud_options[:use_class_name_as_title] ? @instance.class.to_s.humanize : @instance.send(@crud_options[:title_attribute].to_sym).inspect
+        puts "> Crud::before_action" if @crud_options[:log]
+        set_what
         true
       end
       
               
       
       def successful_create
-        puts "> Crud::successful_create"
+        puts "> Crud::successful_create" if @crud_options[:log]
         
         flash[:notice] = t('crudify.created', :what => @what)
         
@@ -41,7 +40,7 @@ module Crudify
       end
       
       def successful_update
-        puts "> Crud::successful_update"
+        puts "> Crud::successful_update" if @crud_options[:log]
         
         flash[:notice] = t('crudify.updated', :what => @what)
         
@@ -49,7 +48,7 @@ module Crudify
       end
       
       def successful_destroy
-        puts "> Crud::successful_destroy"
+        puts "> Crud::successful_destroy" if @crud_options[:log]
         
         flash.notice = t('crudify.destroyed', :what => @what)
         
@@ -57,17 +56,24 @@ module Crudify
       end
       
       def after_success
-        puts "> Crud::after_success"
+        puts "> Crud::after_success" if @crud_options[:log]
         
         unless request.xhr?
-          if params[:commit].match(/continue/)
+          if @redirect_to_url
+            redirect_to @redirect_to_url
+          elsif params[:commit].to_s.match(/continue/)
             if params[:action] == 'create'
-              redirect_to request.referer.sub('new', "#{what.to_param}/edit")
+              redirect_to request.referer.sub('new', "#{@what.to_param}/edit")
             else
               redirect_to request.referer
             end            
           else
-            redirect_back_or_default eval(@crud_options[:redirect_to_url])
+            url = eval(@crud_options[:redirect_to_url])
+            if defined?(redirect_back_or_default)
+              redirect_back_or_default url
+            else
+              redirect_to url
+            end
           end
         else
           render :partial => "/shared/message"
@@ -79,37 +85,29 @@ module Crudify
       
       
       def failed_create
-        puts "> Crud::failed_create"
-        
+        puts "> Crud::failed_create" if @crud_options[:log]
         flash[:error] = t('crudify.failed_create', :what => @what)
-        
         after_fail
       end
       
       def failed_update
-        puts "> Crud::failed_update"
-        
+        puts "> Crud::failed_update" if @crud_options[:log]
         flash[:error] = t('crudify.failed_update', :what => @what)
-        
         after_fail
       end
       
       def failed_destroy
-        puts "> Crud::failed_destroy"
-        
+        puts "> Crud::failed_destroy" if @crud_options[:log]
         flash[:error] = t('crudify.failed_destroy', :what => @what)
-        
         after_fail
       end
-    
-    
+      
       def after_fail
-        puts "> Crud::after_fail"
-        
+        puts "> Crud::after_fail" if @crud_options[:log]
         unless request.xhr?
           render :action => request.post? ? 'new' : 'edit'
         else          
-          flash[:error] = [flash[:error], what.errors.collect{|key,value| "#{key} #{value}"}.join("<br/>")]
+          flash[:error] = [flash[:error], @what.errors.collect{|key,value| "#{key} #{value}"}.join("<br/>")]
           render :partial => "/shared/message"
         end
       end

@@ -28,7 +28,8 @@ module Crudify
         :include => [],
         :paging => true,
         :search_conditions => '',
-        :redirect_to_url => "admin_#{plural_name}_url"
+        :redirect_to_url => "admin_#{plural_name}_url",
+        :log => defined?(Rails) ? Rails.env != 'production' : true
       }
     end
   

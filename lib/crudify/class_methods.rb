@@ -23,8 +23,20 @@ module Crudify
          def set_crud_options
            @crud_options = #{options}
          end
-                               
-  
+                  
+         def set_what
+           return @what if @what
+           what = @crud_options[:use_class_name_as_title] ? @instance.class.to_s.humanize : @instance.send(@crud_options[:title_attribute].to_sym).inspect
+           what = @instance.class.to_s.humanize if what.nil? || what == '""'
+           @what = what
+         end
+                  
+         def index
+         end                      
+          
+         def show
+         end
+          
          def new
            @#{singular_name} = #{class_name}.new
          end
@@ -137,6 +149,13 @@ module Crudify
   
        # Methods that are only included when this controller is searchable.
        if options[:searchable]
+       
+         module_eval %(
+           def searching?
+             params && !params[:search].nil?
+           end
+         )
+         
          if options[:paging]
            module_eval %(
              def index
@@ -223,18 +242,7 @@ module Crudify
   
          )
        end
-  
-       module_eval %(
-         def self.sortable?
-           #{options[:sortable].to_s}
-         end
-  
-         def self.searchable?
-           #{options[:searchable].to_s}
-         end
-       )
-  
-  
+         
      end
   
    end

@@ -1,0 +1,7 @@
+<% target ||= nil %>
+<% unless target.nil? || target.errors.to_a.empty? %>
+  <p class="flash error">
+    <b>Errors:</b><br/>
+    <%= target.errors.to_a.join("<br/>").html_safe %>
+  </p>
+<% end %>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Crudify Dummy</title>
+  <%= csrf_meta_tag %>
+  <%= stylesheet_link_tag 'styles' %>
+  <%= javascript_include_tag :defaults %>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1 class="title">Crudify</h1>
+    <h2>All the CRUD, no hassle.</h2>
+  </div>
+  
+  <hr/>  
+  <h4><em>Disclaimer</em></h4>
+  <p>Crudify was shamlessly robbed from <%= link_to "refinerycms", "https://github.com/resolve/refinerycms/blob/master/core/lib/refinery/crud.rb" %>'s internals and customized for use in other projects. Much credit and many thanks to the guys at <%= link_to "resolve digital", "http://resolvedigital.com/" %> for all their hard work on the <%= link_to "refinery cms project", "http://resolvedigital.com/development/refinery%C2%A0cms" %>. Keep it up!</p>
+  
+  <hr/>
+  
+  <%= content_tag(:p, flash[:notice], :class => 'flash notice') if flash[:notice] %>
+  <%= content_tag(:p, flash[:error], :class => 'flash error') if flash[:error] %>
+
+  
+  <h3>Here's the controller running this demo:</h3>
+  <pre>
+class JelliesController < ApplicationController
+  crudify :jelly, :redirect_to_url => "jellies_url"
+end</pre>
+
+  <hr/>
+  <h3>Here's the CRUD:</h3>
+  
+  <%= yield %>
+
+  <hr/>
+  
+  <h3>Here's how to get some:</h3>
+  
+  <p class="small"><%= link_to "Github", "https://github.com/citrus/crudify" %> or <%= link_to "Ruby Gems", "http://rubygems.org/gems/crudify" %>; take your pick.</p>
+  
+  
+  <hr/>
+  <em>Now enjoy your jellies with no hassle from crud!</em>
+
+</div>
+
+</body>
+</html>

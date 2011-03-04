@@ -1,0 +1,11 @@
+<%= render 'shared/error_messages', :target => @jelly %>
+
+<fieldset>
+  <legend>Show Jelly</legend>
+  <h3><%= @jelly.title %></h3>
+  <p><%= @jelly.name %></p>
+</fieldset>
+
+<br/>
+
+<p><%= link_to "back to jellies", jellies_path %></p>

@@ -1,5 +1,7 @@
 .bundle
 .DS_Store
-pkg/*
 *.gem
-test/db/*.sqlite3
+pkg/*
+test/dummy/log
+test/dummy/tmp
+test/dummy/*.sqlite3
