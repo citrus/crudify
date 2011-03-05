@@ -9,7 +9,7 @@ module Crudify
        class_name = singular_name.camelize
        plural_name = singular_name.pluralize
        
-       options[:paging] = (options[:paging] && eval(class_name).respond_to?(:paginate))
+       options[:paginate] = (options[:paginate] && eval(class_name).respond_to?(:paginate))
   
        module_eval %(
        
@@ -121,14 +121,14 @@ module Crudify
            # If we have already found a set then we don't need to again
            find_all_#{plural_name} if @#{plural_name}.nil?
   
-           paging_options = {:page => params[:page]}
+           paginate_options = {:page => params[:page]}
   
            # Seems will_paginate doesn't always use the implicit method.
            if #{class_name}.methods.map(&:to_sym).include?(:per_page)
-             paging_options.update({:per_page => #{class_name}.per_page})
+             paginate_options.update({:per_page => #{class_name}.per_page})
            end
   
-           set_collection(@#{plural_name}.paginate(paging_options), false)
+           set_collection(@#{plural_name}.paginate(paginate_options), false)
          end
   
          # Returns results based on the query specified by the user.
@@ -155,7 +155,7 @@ module Crudify
            end
          )
          
-         if options[:paging]
+         if options[:paginate]
            module_eval %(
              def index
                search_all_#{plural_name} if searching?
@@ -174,7 +174,7 @@ module Crudify
            )
          end
        else
-         if options[:paging]
+         if options[:paginate]
            module_eval %(
              def index
                paginate_all_#{plural_name}

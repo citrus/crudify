@@ -8,9 +8,9 @@
 </head>
 <body>
 
-<div class="container">
+<div id="container">
 
-  <div class="header">
+  <div id="header">
     <h1 class="title">Crudify</h1>
     <h2>All the CRUD, no hassle.</h2>
   </div>
@@ -20,11 +20,6 @@
   <p>Crudify was shamlessly robbed from <%= link_to "refinerycms", "https://github.com/resolve/refinerycms/blob/master/core/lib/refinery/crud.rb" %>'s internals and customized for use in other projects. Much credit and many thanks to the guys at <%= link_to "resolve digital", "http://resolvedigital.com/" %> for all their hard work on the <%= link_to "refinery cms project", "http://resolvedigital.com/development/refinery%C2%A0cms" %>. Keep it up!</p>
   
   <hr/>
-  
-  <%= content_tag(:p, flash[:notice], :class => 'flash notice') if flash[:notice] %>
-  <%= content_tag(:p, flash[:error], :class => 'flash error') if flash[:error] %>
-
-  
   <h3>Here's the controller running this demo:</h3>
   
   <% file = File.expand_path("../../../controllers/#{controller.controller_path}_controller.rb", __FILE__) %>
@@ -34,15 +29,38 @@
     
   <hr/>
   <h3>Here's the CRUD:</h3>
-  <hr/>
   
-  <%= yield %>
+  <%= content_tag(:p, flash[:notice], :id => 'flash_notice', :class => 'flash') if flash[:notice] %>
+  <%= content_tag(:p, flash[:error], :id => 'flash_error', :class => 'flash') if flash[:error] %>
+  
+  <div id="content">
+    <%= yield %>
+  </div>
 
+  
+  <h3>Here's some more info:</h3>
+
+  <p>Like the available options:</p>
+  <pre>
+:title_attribute => "title",
+:use_class_name_as_title => false,
+:paginate => true,
+:sortable => true,
+:searchable => true,
+:include => [],
+:order => ('position ASC' if this_class.table_exists?
+  && this_class.column_names.include?('position')),
+:conditions => '',
+:search_conditions => '',
+:redirect_to_url => "admin_#{plural_name}_url",
+:log => Rails.env == 'development'</pre>
+  
+  
+  
   <hr/>
-  
-  <h3>Here's how to get some:</h3>
-  
+  <h3>Get some:</h3>
   <p class="small"><%= link_to "Github", "https://github.com/citrus/crudify" %> or <%= link_to "Ruby Gems", "http://rubygems.org/gems/crudify" %>; take your pick.</p>
+  
   
   
   <hr/>

@@ -19,22 +19,22 @@ module Crudify
       def before_destroy
         # just a hook!
         puts "> Crud::before_destroy" if @crud_options[:log]
+        set_what
         before_action
       end
             
       def before_action
         # just a hook!
         puts "> Crud::before_action" if @crud_options[:log]
-        set_what
-        true
+        #true
       end
       
               
       
       def successful_create
         puts "> Crud::successful_create" if @crud_options[:log]
-        
-        flash[:notice] = t('crudify.created', :what => @what)
+
+        flash[:notice] = t('crudify.created', :what => set_what)
         
         after_success
       end
@@ -42,14 +42,13 @@ module Crudify
       def successful_update
         puts "> Crud::successful_update" if @crud_options[:log]
         
-        flash[:notice] = t('crudify.updated', :what => @what)
+        flash[:notice] = t('crudify.updated', :what => set_what)
         
         after_success
       end
       
       def successful_destroy
         puts "> Crud::successful_destroy" if @crud_options[:log]
-        
         flash.notice = t('crudify.destroyed', :what => @what)
         
         after_success
@@ -86,13 +85,13 @@ module Crudify
       
       def failed_create
         puts "> Crud::failed_create" if @crud_options[:log]
-        flash[:error] = t('crudify.failed_create', :what => @what)
+        flash[:error] = t('crudify.failed_create', :what => set_what)
         after_fail
       end
       
       def failed_update
         puts "> Crud::failed_update" if @crud_options[:log]
-        flash[:error] = t('crudify.failed_update', :what => @what)
+        flash[:error] = t('crudify.failed_update', :what => set_what)
         after_fail
       end
       

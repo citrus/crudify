@@ -17,24 +17,38 @@ h4 {
   margin-bottom: 0.5em;
 }
 
-.container {
-  width: 500px;
+#container {
+  width: 540px;
   margin: 0 auto;
 }
-.header h1 {
+
+#header h1 {
   margin-bottom: 0;
 }
-.header h2 {
+#header h2 {
   margin: 0 0 1.5em 0;
   font-size: 1em;
   font-weight: normal;
   font-style: italic;
 }
-.header a {
+#header a {
   display: inline-block;
   padding: 4px 10px;
   background-color: #eee;
 }
+
+#content {
+  padding: 4px 7px;
+  background-color: #fafafa;
+  border: 1px solid #f0f0f0;
+  margin-bottom: 3em;
+}
+#content h3 {
+  margin-top: 0.5em;
+}
+
+
+
 
 hr {
   border: 0;
@@ -74,14 +88,22 @@ form p.action {
 
 
 .flash {
-  padding: 0 0 10px 0;
+  padding: 10px 7px;
+  border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
+  background-color: #fafafa;
 }
-.flash.notice {
+#flash_notice {
   color: #68962c;
+  border-color: #68962c;
 }
-.flash.error {
+#flash_error {
   color: #c00e0e;
+  border-color: #c00e0e;
+}
+.flash ul.errors {
+  padding-left: 20px;
+  margin: 0.3em 0; 
 }
 
 

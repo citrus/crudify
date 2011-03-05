@@ -21,15 +21,15 @@ module Crudify
       {
         :title_attribute => "title",
         :use_class_name_as_title => false,
-        :order => ('position ASC' if this_class.table_exists? and this_class.column_names.include?('position')),
-        :conditions => '',
+        :paginate => true,
         :sortable => true,
         :searchable => true,
         :include => [],
-        :paging => true,
+        :order => ('position ASC' if this_class.table_exists? && this_class.column_names.include?('position')),
+        :conditions => '',
         :search_conditions => '',
         :redirect_to_url => "admin_#{plural_name}_url",
-        :log => defined?(Rails) ? Rails.env != 'production' : true
+        :log => Rails.env == 'development'
       }
     end
   

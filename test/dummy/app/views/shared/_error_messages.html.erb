@@ -1,7 +1,9 @@
 <% target ||= nil %>
 <% unless target.nil? || target.errors.to_a.empty? %>
-  <p class="flash error">
-    <b>Errors:</b><br/>
-    <%= target.errors.to_a.join("<br/>").html_safe %>
-  </p>
+  <div class="flash">
+    <b>Errors:</b>
+    <ul class="errors">
+      <%= target.errors.to_a.collect{|e|"<li>#{e}</li>"}.join("\n").html_safe %>
+    </ul>
+  </div>
 <% end %>
