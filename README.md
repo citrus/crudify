@@ -1,5 +1,5 @@
 Crudify
--------
+=======
 
 A dynamic resource controller for Rails 3 that keeps your controllers nice and skinny.
 
@@ -9,29 +9,24 @@ Crudify was shamlessly robbed from [refinerycms](https://github.com/resolve/refi
 Usage
 -----
 
-In its most basic form, `crudify` is designed to be use like this:
+In its most basic form, crudify is designed to be use like this:
 
     class JelliesController < ApplicationController
       crudify :jelly
     end
     
     
-Ok, so what does it do? The short answer; _everything_ that you'd want it to. In more detail, crudify turns your controller into a full-fledged CRUD controller with `index`, `new`, `create`, `show`, `edit`, `update`, and `destroy`. But wait, there's more! Inside each of these standard methods are several _hook methods_ designed to make customizing your controllers even easier that over-riding crudify's methods. Over-riding; say what? ... I guess that's a good place to start.
+Ok, so what does it do? The short answer; _everything_ that you'd want it to. In more detail, crudify turns your controller into a full-fledged CRUD controller with `index`, `new`, `create`, `show`, `edit`, `update`, and `destroy`. But wait, there's more! Inside each of these standard methods are several _hook methods_ designed to make customizing your controllers even easier that over-riding crudify's methods. Over-riding; say what? ... 
 
-
-If you want to customize an action that's being defined by crudify, simply over-ride it!
+Say you want to customize an action that's being defined by crudify, simply over-ride it!
 
     class JelliesController < ApplicationController
       crudify :jelly
       
-      def create
-        
+      def create     
         @jelly = Jelly.new(params[:jelly])
-        
         # ... the rest of your custom action
-        
       end
-      
     end
     
 
@@ -41,7 +36,7 @@ Ok that seems easy enough, but what if my action is just a tiny bit different? T
 
 Laced into crudify's actions are a module full of methods designed to make customizing your controller quick and simple. Let's examine these methods in further detail starting with create.
 
-Here's what lines 46-60 in `lib/crudify/class_methods.rb` will produce in our Jellies controller:
+Here's what lines #45-59 in `lib/crudify/class_methods.rb` will produce in our Jellies controller:
 
     def create
       # if the position field exists, set this object as last object, given the conditions of this class.
@@ -60,7 +55,7 @@ Here's what lines 46-60 in `lib/crudify/class_methods.rb` will produce in our Je
     end
     
 
-Just before the calls to `valid?` and `save`, you'll see `before_create`; the first hook method in the action. Looking further into the source, `before_create` is nothing more than a blank action, waiting to be overwritten. 
+Just before the calls to `valid?` and `save`, you'll see `before_create`; the first hook method in the action. Looking further into the source, `before_create` is nothing more than a blank action, waiting to be overwritten:
 
       def before_create
         # just a hook!
@@ -69,7 +64,7 @@ Just before the calls to `valid?` and `save`, you'll see `before_create`; the fi
       end
       
 
-Notice that `before_create` calls a second hook, `before_action`, which is a generic hook that fires before every crud method's call to `save`, `update` or `destroy`. This means it might be helpful for you to call `super` when over-riding this method so that the chain of hooks keeps firing. Inside the `before_action` method we'll decide what to use as flash messages with `set_what`. Here's the code for `before_action`:
+Notice that `before_create` calls a second hook; `before_action`. This is a generic hook that fires before every crud method's call to `save`, `update` or `destroy`. This means it might be helpful for you to call `super` when over-riding this method so that the chain of hooks keeps firing. Inside the `before_action` method we'll decide what to use as flash messages with `set_what`. Here's the code for `before_action`:
 
       def before_action
         # just a hook!
@@ -110,6 +105,8 @@ Or an after-action hook:
 * For available options: [Crudify::Base](https://github.com/citrus/crudify/blob/master/lib/crudify/base.rb)
 * For available hooks: [Crudify::HookMethods](https://github.com/citrus/crudify/blob/master/lib/crudify/hook_methods.rb)
 * To see which hooks go where: [Cruidfy::ClassMethods](https://github.com/citrus/crudify/blob/master/lib/crudify/class_methods.rb)
+
+Or check out the demo app in `test/dummy`...
 
 
 Testing
