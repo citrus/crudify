@@ -1,11 +1,16 @@
 require 'helper'
 
-
 	
-class TestCrudify < Test::Unit::TestCase
+class CrudifyTest < Test::Unit::TestCase
 
   def setup
-    @controller = CrudifyTestController.new 
+  
+    Jelly.destroy_all
+    10.times{|i|
+      Jelly.create(:title => "Yummy Jelly #{i}", :name => "Sample #{i}")
+    }
+  
+    @controller = JelliesController.new 
     @controller.params = {}
   end
   
@@ -39,13 +44,14 @@ class TestCrudify < Test::Unit::TestCase
   
   should "get collection" do
     jellies = @controller.send(:find_all_jellies)
-    assert_equal 3, jellies.length
+    assert_equal 10, jellies.length, "Confirm 10 total jellies"
   end
   
   should "paginate collection" do
     jellies = @controller.send(:paginate_all_jellies)
-    assert_equal 2, jellies.total_pages
-    assert_equal 3, jellies.total_entries
+    
+    assert_equal 4, jellies.total_pages, "10 jellies, 3 per page = 4 pages"
+    assert_equal 10, jellies.total_entries, "Confirm 10 total jellies"
   end  
   
 end

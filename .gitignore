@@ -4,4 +4,4 @@
 pkg/*
 test/dummy/log
 test/dummy/tmp
-test/dummy/*.sqlite3
+test/dummy/db/*.sqlite3
