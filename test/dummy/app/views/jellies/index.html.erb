@@ -1,3 +1,4 @@
+<h3>Listing Jellies</h3>
 <%= link_to "<em>create</em> a new jelly".html_safe, new_jelly_path %>
 
 <% if @jellies.empty? %>
@@ -16,5 +17,7 @@
       </li>
     <% end %>
   </ul>
+  <%= will_paginate @jellies %>
+  <br/>
   <p>So much jelly, <strike>so little time</strike> and time to eat it too.</p>
 <% end %>

@@ -3,10 +3,10 @@
 # Don't forget to add:
 #   resources :plural_model_name_here
 # to your routes.rb file.
-# Full documentation about CRUD and resources go here:
-# -> http://caboo.se/doc/classes/ActionController/Resources.html#M003716
+# Full documentation about CRUD and resources start here:
+# -> http://www.google.com/search?q=rails%20REST
 # Example (add to your controller):
-# crudify :foo, {:title_attribute => 'name'}
+# crudify :foo, { :title_attribute => 'name' }
 
 
 module Crudify

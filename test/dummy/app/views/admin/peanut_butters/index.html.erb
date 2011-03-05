@@ -1,0 +1,23 @@
+<h3>Listing Peanut Butters</h3>
+<%= link_to "<em>create</em> a new peanut_butter".html_safe, new_admin_peanut_butter_path %>
+
+<% if @peanut_butters.empty? %>
+  to start your adventure. 
+<% else %>
+  or 
+  <ul class="items">
+    <% @peanut_butters.each do |peanut_butter| %>
+      <li>
+        <span>
+          <%= link_to content_tag(:em, "read"), admin_peanut_butter_path(peanut_butter) %>, 
+          <%= link_to content_tag(:em, "update"), edit_admin_peanut_butter_path(peanut_butter) %> or 
+          <%= link_to content_tag(:em, "delete"), admin_peanut_butter_path(peanut_butter), :method => :delete, :confirm => "Are you sure?" %>
+        </span>
+        <b><%= peanut_butter.viscosity.inspect %></b>
+      </li>
+    <% end %>
+  </ul>
+  <%= will_paginate @peanut_butters %>
+  <br/>
+  <p>So much peanut_butter, <strike>so little time</strike> and time to eat it too.</p>
+<% end %>

@@ -26,13 +26,15 @@
 
   
   <h3>Here's the controller running this demo:</h3>
-  <pre>
-class JelliesController < ApplicationController
-  crudify :jelly, :redirect_to_url => "jellies_url"
-end</pre>
-
+  
+  <% file = File.expand_path("../../../controllers/#{controller.controller_path}_controller.rb", __FILE__) %>
+  <% if File.exists?(file) %>
+    <pre><%= File.read(file) %></pre>
+  <% end %>
+    
   <hr/>
   <h3>Here's the CRUD:</h3>
+  <hr/>
   
   <%= yield %>
 

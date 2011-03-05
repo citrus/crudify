@@ -1,10 +1,9 @@
+<h3>New Jelly</h3>
+
 <%= render 'shared/error_messages', :target => @jelly %>
 
 <%= form_for @jelly do |f| %>
-  <fieldset>
-    <legend>New Jelly</legend>
-    <%= render 'fields', :form => f %>
-  </fieldset>
+  <%= render 'fields', :form => f %>
   <p class="action">
     <%= f.submit 'create' %>
     or <%= link_to "cancel", jellies_path %>

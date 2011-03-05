@@ -1,0 +1,11 @@
+<h3>New Peanut Butter</h3>
+
+<%= render 'shared/error_messages', :target => @peanut_butter %>
+
+<%= form_for [:admin, @peanut_butter] do |f| %>
+  <%= render 'fields', :form => f %>
+  <p class="action">
+    <%= f.submit 'create' %>
+    or <%= link_to "cancel", admin_peanut_butters_path %>
+  </p>
+<% end %> 

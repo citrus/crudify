@@ -32,4 +32,7 @@ Dummy::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+  
+  config.use_transactional_fixtures = true
+  
 end

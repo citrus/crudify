@@ -26,8 +26,8 @@ module Crudify
                   
          def set_what
            return @what if @what
-           what = @crud_options[:use_class_name_as_title] ? @instance.class.to_s.humanize : @instance.send(@crud_options[:title_attribute].to_sym).inspect
-           what = @instance.class.to_s.humanize if what.nil? || what == '""'
+           what = @crud_options[:use_class_name_as_title] ? @instance.class.to_s.underscore.humanize : @instance.send(@crud_options[:title_attribute].to_sym).inspect
+           what = @instance.class.to_s.underscore.humanize if what.nil? || what == '""'
            @what = what
          end
                   
@@ -74,7 +74,6 @@ module Crudify
          def destroy
            before_destroy
            # object gets found by find_#{singular_name} function
-           title = @#{singular_name}.#{options[:title_attribute]}
            if @#{singular_name}.destroy
              successful_destroy
            else

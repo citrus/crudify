@@ -1,0 +1,14 @@
+<h3>Show Peanut Butter</h3>
+
+<%= render 'shared/error_messages', :target => @peanut_butter %>
+
+<h3><%= @peanut_butter.viscosity %></h3>
+
+<br/>
+
+<p>
+  <%= link_to content_tag(:em, "update"), edit_admin_peanut_butter_path(@peanut_butter) %> or 
+  <%= link_to content_tag(:em, "delete"), admin_peanut_butter_path(@peanut_butter), :method => :delete, :confirm => "Are you sure?" %>
+  this peanut_butter, or 
+  <%= link_to "return to peanut_butters", admin_peanut_butters_path %>
+</p>
