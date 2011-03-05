@@ -1,3 +1,10 @@
+#
+# Disclaimer:
+#
+# The majority of this was originally written by 
+# the splendid fellows at Resolve Digital for their
+# awesome refinerycms project.
+#
 module Crudify  
 
   module ClassMethods
