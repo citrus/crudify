@@ -21,3 +21,32 @@
   <br/>
   <p>So much jelly, <strike>so little time</strike> and time to eat it too.</p>
 <% end %>
+
+<hr/>
+
+<h3>Search for Jellies?</h3>
+<p><em>Yeah, it does that too using <%= link_to "meta_search", "https://github.com/ernie/meta_search" %>.</em></p>
+
+<%= form_for @search, :html => {:method => :get} do |f| %>
+  <p>
+    <%= f.label :title_contains, 'Title:' %>
+    <%= f.text_field :title_contains %>
+  </p>
+  <p>
+    <%= f.label :name_contains, 'Name:' %>
+    <%= f.text_field :name_contains %>
+  </p>
+  <p class="action">
+    <%= f.submit 'Search' %>
+  </p>
+<% end %>
+<hr/>
+<!--
+
+<h3>And sorting?</h3>
+<p><em>Yep, just set it as an option.</p>
+
+<pre>
+  # todo
+</pre>
+-->

@@ -166,7 +166,7 @@ module Crudify
          if options[:paginate]
            module_eval %(
              def index
-               search_all_#{plural_name} if searching?
+               search_all_#{plural_name}
                paginate_all_#{plural_name}
              end
            )

@@ -19,7 +19,6 @@ module Crudify
       def before_destroy
         # just a hook!
         puts "> Crud::before_destroy" if @crud_options[:log]
-        set_what
         before_action
       end
             
@@ -106,7 +105,7 @@ module Crudify
         unless request.xhr?
           render :action => request.post? ? 'new' : 'edit'
         else          
-          flash[:error] = [flash[:error], @what.errors.collect{|key,value| "#{key} #{value}"}.join("<br/>")]
+          flash[:error] = [flash[:error], @instance.errors.collect{|key,value| "#{key} #{value}"}.join("<br/>")]
           render :partial => "/shared/message"
         end
       end
