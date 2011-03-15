@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    crudify (0.0.4)
+    crudify (0.0.5)
       meta_search (>= 1.0.1)
       rails (>= 3.0.0)
       will_paginate (>= 2.3.15)

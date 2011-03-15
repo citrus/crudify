@@ -80,6 +80,7 @@ module Crudify
   
          def destroy
            before_destroy
+           set_what
            # object gets found by find_#{singular_name} function
            if @#{singular_name}.destroy
              successful_destroy

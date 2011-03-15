@@ -62,7 +62,7 @@ module Crudify
             redirect_to @redirect_to_url
           elsif params[:commit].to_s.match(/continue/)
             if params[:action] == 'create'
-              redirect_to request.referer.sub('new', "#{@what.to_param}/edit")
+              redirect_to request.referer.sub(/(\/?(new)?\/?)$/, '') + "/#{@instance.to_param}"
             else
               redirect_to request.referer
             end            

@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.homepage    = "http://github.com/citrus/crudify"
   
   s.summary     = %q{Crudify is a dynamic resource controller for Rails 3.}
-  s.description = %q{Crudify is a dynamic resource controller for Rails 3. The goal is to have very skinny controllers with powerful hooks to easily customize.}
+  s.description = %q{Crudify is a dynamic resource controller for Rails 3. The idea is skinny controllers with powerful hooks for easy customization.}
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
