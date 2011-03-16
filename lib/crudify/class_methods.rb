@@ -103,9 +103,9 @@ module Crudify
          def scope_with_options(scope)
            scope.includes(
              #{options[:include].map(&:to_sym).inspect}
-           ).order("#{options[:order]}")
+           )
          end
-         
+         # .order("#{options[:order]}")
   
          # Finds one single result based on the id params.
          def find_#{singular_name}
@@ -139,6 +139,8 @@ module Crudify
   
          # Returns results based on the query specified by the user.
          def search_all_#{plural_name}
+           params[:search] ||= {}
+           params[:search][:meta_sort] ||= #{options[:order].to_s.downcase.gsub(' ', '.').inspect}
            @search ||= find_all_#{plural_name}.search(params[:search])
            set_collection(@search, false)
          end
