@@ -61,10 +61,12 @@ module Crudify
             redirect_to @redirect_to_url
           elsif params[:commit].to_s.match(/continue/)
             if params[:action] == 'create'
-              redirect_to request.referer.sub(/(\/?(new)?\/?)$/, '') + "/#{@instance.to_param}"
+              url =  request.referer.sub(/(\/?(new)?\/?)$/, '') + "/#{@instance.to_param}"
+              url += "/edit" if params[:commit].to_s.match(/edit/)
             else
-              redirect_to request.referer
-            end            
+              url = request.referer
+            end    
+            redirect_to url        
           else
             url = eval(@crud_options[:redirect_to_url])
             if defined?(redirect_back_or_default)

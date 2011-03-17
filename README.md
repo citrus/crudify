@@ -102,9 +102,9 @@ Or an after-action hook:
 
 ### To find out more about crudify, read the source! Here's some helpful links:
 
-* For available options: [Crudify::Base](https://github.com/citrus/crudify/blob/master/lib/crudify/base.rb)
-* For available hooks: [Crudify::HookMethods](https://github.com/citrus/crudify/blob/master/lib/crudify/hook_methods.rb)
-* To see which hooks go where: [Cruidfy::ClassMethods](https://github.com/citrus/crudify/blob/master/lib/crudify/class_methods.rb)
+* For available **options**: [Crudify::Base](https://github.com/citrus/crudify/blob/master/lib/crudify/base.rb)
+* For available **hooks**: [Crudify::HookMethods](https://github.com/citrus/crudify/blob/master/lib/crudify/hook_methods.rb)
+* To see **which hooks go where**: [Cruidfy::ClassMethods](https://github.com/citrus/crudify/blob/master/lib/crudify/class_methods.rb)
 
 Or check out the demo app in `test/dummy`...
 
@@ -123,7 +123,10 @@ Shoulda and Capybara/Selenium tests can be run by cloning the repo and running `
 To Do
 -----
 
-* Documentation & Examples
+There's a few things to be done still...
+
+* Tests for search
+* More Documentation & Examples
 * Nested set tests and demo (haven't even tried this yet :/)
 * Generally more thorough tests
 * Refactoring/Optimizing
@@ -132,7 +135,7 @@ To Do
 License
 -------
 
-Crudify is released under [Resolve Digital](http://www.resolvedigital.com)'s original license since portions of the code was extracted from [refinerycms](http://github.com/resolve/refinerycms).
+Although many things have been rewritten, crudify is released under [Resolve Digital's](http://www.resolvedigital.com) original license since portions code were extracted from their [refinerycms](http://github.com/resolve/refinerycms) project.
 
 ### MIT License
  
