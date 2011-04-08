@@ -106,7 +106,6 @@ module Crudify
              #{options[:include].map(&:to_sym).inspect}
            )
          end
-         # .order("#{options[:order]}")
   
          # Finds one single result based on the id params.
          def find_#{singular_name}
