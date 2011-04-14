@@ -11,9 +11,6 @@ module Crudify
   module ClassMethods
     
      def crudify(model_name, options = {})
-        
-       puts model_name.inspect
-       puts options.inspect
        
        options = ::Crudify::Base.default_options(model_name).merge(options)
        
