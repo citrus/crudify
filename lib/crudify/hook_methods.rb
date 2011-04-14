@@ -25,7 +25,7 @@ module Crudify
       def before_action
         # just a hook!
         puts "> Crud::before_action" if @crud_options[:log]
-        #true
+        true
       end
       
               

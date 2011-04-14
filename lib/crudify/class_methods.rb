@@ -11,6 +11,10 @@ module Crudify
   module ClassMethods
     
      def crudify(model_name, options = {})
+        
+       puts model_name.inspect
+       puts options.inspect
+       
        options = ::Crudify::Base.default_options(model_name).merge(options)
        
        singular_name = model_name.to_s
@@ -29,7 +33,7 @@ module Crudify
          prepend_before_filter :set_crud_options                        
                                
          def set_crud_options
-           @crud_options = #{options}
+           @crud_options = #{options.inspect}
          end
                   
          def set_what
@@ -58,7 +62,8 @@ module Crudify
              })
            end
            @instance = @#{singular_name} = #{class_name}.create(params[:#{singular_name}])
-           before_create
+           ok = before_create
+           return ok unless ok === true
            if @instance.valid? && @instance.save  
              successful_create
            else
@@ -71,7 +76,8 @@ module Crudify
          end
   
          def update
-           before_update
+           ok = before_update
+           return ok unless ok === true           
            if @#{singular_name}.update_attributes(params[:#{singular_name}])
              successful_update              
            else
@@ -80,8 +86,9 @@ module Crudify
          end
   
          def destroy
-           before_destroy
            set_what
+           ok = before_destroy
+           return ok unless ok === true
            # object gets found by find_#{singular_name} function
            if @#{singular_name}.destroy
              successful_destroy
@@ -131,7 +138,7 @@ module Crudify
   
            # Seems will_paginate doesn't always use the implicit method.
            if #{class_name}.methods.map(&:to_sym).include?(:per_page)
-             paginate_options.update({:per_page => #{class_name}.per_page})
+             paginate_options.update(:per_page => #{class_name}.per_page)
            end
   
            set_collection(@#{plural_name}.paginate(paginate_options), false)
