@@ -58,7 +58,7 @@ module Crudify
                :position => ((#{class_name}.maximum(:position, :conditions => #{options[:conditions].inspect})||-1) + 1)
              })
            end
-           @instance = @#{singular_name} = #{class_name}.create(params[:#{singular_name}])
+           @instance = @#{singular_name} = #{class_name}.new(params[:#{singular_name}])
            ok = before_create
            return ok unless ok === true
            if @instance.valid? && @instance.save  
