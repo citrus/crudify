@@ -31,7 +31,7 @@ In its most basic form, crudify is designed to be use like this:
     end
     
     
-Ok, so what does it do? The short answer; _everything_ that you'd want it to. In more detail, crudify turns your controller into a full-fledged CRUD controller with `index`, `new`, `create`, `show`, `edit`, `update`, and `destroy`. But wait, there's more! Inside each of these standard methods are several _hook methods_ designed to make customizing your controllers even easier that overwriting crudify's methods. Over-riding; say what? ... 
+Ok, so what does it do? The short answer; _everything_ that you'd want it to. In more detail, crudify turns your controller into a full-fledged CRUD controller with `index`, `new`, `create`, `show`, `edit`, `update`, and `destroy`. But wait, there's more! Inside each of these standard methods are several _hook methods_ designed to make customizing your controllers even easier that overwriting crudify's methods. Overwriting; say what? ... 
 
 Say you want to customize an action that's being defined by crudify, simply overwrite it!
 
@@ -91,6 +91,8 @@ Notice that `before_create` calls a second hook; `before_action`. This is a gene
 
 *Ok Ok, so we're gettin' kind of deep here.* Let's get back to the basic concept; Skinny, sexy and easy on the eyes. (Are we still talking ruby here?) 
 
+Here's an example of a `before_create` hook:
+
     class InquiriesController < ApplicationController
       crudify :inquiry
       
@@ -102,7 +104,7 @@ Notice that `before_create` calls a second hook; `before_action`. This is a gene
     end
       
 
-Or an after-action hook:
+And a `successful_create` hook:
 
     class InquiriesController < ApplicationController
       crudify :inquiry
@@ -121,7 +123,7 @@ Or an after-action hook:
 * For available **hooks**: [Crudify::HookMethods](https://github.com/citrus/crudify/blob/master/lib/crudify/hook_methods.rb)
 * To see **which hooks go where**: [Cruidfy::ClassMethods](https://github.com/citrus/crudify/blob/master/lib/crudify/class_methods.rb)
 
-Or check out the demo app in `test/dummy`...
+Also, check out the demo app in `test/dummy`...
 
 
 Testing
