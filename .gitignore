@@ -1,6 +1,7 @@
 .bundle
 .DS_Store
 *.gem
+Gemfile.lock
 pkg/*
 test/dummy/log
 test/dummy/tmp

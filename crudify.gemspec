@@ -3,6 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "crudify/version"
 
 Gem::Specification.new do |s|
+
   s.name        = "crudify"
   s.version     = Crudify::VERSION
   s.platform    = Gem::Platform::RUBY

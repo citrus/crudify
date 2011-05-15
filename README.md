@@ -45,7 +45,7 @@ Here's what lines #45-59 in `lib/crudify/class_methods.rb` will produce in our J
           :position => ((Jelly.maximum(:position, :conditions => "")||-1) + 1)
         })
       end
-      @instance = @jelly = Jelly.create(params[:jelly])
+      @instance = @jelly = Jelly.new(params[:jelly])
       before_create
       if @instance.valid? && @instance.save
         successful_create
