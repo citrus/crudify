@@ -6,6 +6,21 @@ A dynamic resource controller for Rails 3 that keeps your controllers nice and s
 Crudify was shamlessly robbed from [refinerycms](https://github.com/resolve/refinerycms/blob/master/core/lib/refinery/crud.rb)'s internals and customized for use in other projects. Much credit and many thanks to the guys at [resolve digital](http://resolvedigital.com/) for all their hard work on the [refinery cms project](http://resolvedigital.com/development/refinery%C2%A0cms). Keep it up!
 
 
+Installation
+------------
+
+It's best to install crudify by adding your Rails 3 project's Gemfile:
+
+    # Gemfile
+    source "http://rubygems.org"
+    gem 'rails',   '>= 3.0.0'        
+    gem 'crudify', '>= 0.0.6'
+
+Now run:
+
+    bundle install
+    
+
 Usage
 -----
 
@@ -16,9 +31,9 @@ In its most basic form, crudify is designed to be use like this:
     end
     
     
-Ok, so what does it do? The short answer; _everything_ that you'd want it to. In more detail, crudify turns your controller into a full-fledged CRUD controller with `index`, `new`, `create`, `show`, `edit`, `update`, and `destroy`. But wait, there's more! Inside each of these standard methods are several _hook methods_ designed to make customizing your controllers even easier that over-riding crudify's methods. Over-riding; say what? ... 
+Ok, so what does it do? The short answer; _everything_ that you'd want it to. In more detail, crudify turns your controller into a full-fledged CRUD controller with `index`, `new`, `create`, `show`, `edit`, `update`, and `destroy`. But wait, there's more! Inside each of these standard methods are several _hook methods_ designed to make customizing your controllers even easier that overwriting crudify's methods. Over-riding; say what? ... 
 
-Say you want to customize an action that's being defined by crudify, simply over-ride it!
+Say you want to customize an action that's being defined by crudify, simply overwrite it!
 
     class JelliesController < ApplicationController
       crudify :jelly
@@ -64,7 +79,7 @@ Just before the calls to `valid?` and `save`, you'll see `before_create`; the fi
       end
       
 
-Notice that `before_create` calls a second hook; `before_action`. This is a generic hook that fires before every crud method's call to `save`, `update` or `destroy`. This means it might be helpful for you to call `super` when over-riding this method so that the chain of hooks keeps firing. Inside the `before_action` method we'll decide what to use as flash messages with `set_what`. Here's the code for `before_action`:
+Notice that `before_create` calls a second hook; `before_action`. This is a generic hook that fires before every crud method's call to `save`, `update` or `destroy`. This means it might be helpful for you to call `super` when overwriting this method so that the chain of hooks keeps firing. Inside the `before_action` method we'll decide what to use as flash messages with `set_what`. Here's the code for `before_action`:
 
       def before_action
         # just a hook!
