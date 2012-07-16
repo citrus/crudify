@@ -14,7 +14,7 @@ It's best to install crudify by adding your Rails 3 project's Gemfile:
     # Gemfile
     source "http://rubygems.org"
     gem 'rails',   '>= 3.0.0'        
-    gem 'crudify', '>= 0.0.6'
+    gem 'crudify', '>= 0.0.7'
 
 Now run:
 
