@@ -3,7 +3,7 @@ Crudify
 
 A dynamic resource controller for Rails 3 that keeps your controllers nice and skinny.
 
-Crudify was shamlessly robbed from [refinerycms](https://github.com/resolve/refinerycms/blob/master/core/lib/refinery/crud.rb)'s internals and customized for use in other projects. Much credit and many thanks to the guys at [resolve digital](http://resolvedigital.com/) for all their hard work on the [refinery cms project](http://resolvedigital.com/development/refinery%C2%A0cms). Keep it up!
+Crudify was shamelessly robbed from [refinerycms](https://github.com/resolve/refinerycms/blob/master/core/lib/refinery/crud.rb)'s internals and customized for use in other projects. Much credit and many thanks to the guys at [resolve digital](http://resolvedigital.com/) for all their hard work on the [refinery cms project](http://resolvedigital.com/development/refinery%C2%A0cms). Keep it up!
 
 
 Installation
