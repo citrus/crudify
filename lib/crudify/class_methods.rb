@@ -146,7 +146,7 @@ module Crudify
          # from within the current controller.
          protected :find_#{singular_name},
                    :find_all_#{plural_name},
-                   :paginate_all_#{plural_name},
+                   :paginate_all_#{plural_name}
        )
   
      end
