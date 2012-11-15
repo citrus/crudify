@@ -27,6 +27,7 @@ module Crudify
 	:order => ({ position: :asc } if this_class.fields.keys.include?('position')),
         :conditions => '',
         :search_conditions => '',
+	:redirect_to_url => "#{plural_name}_url",
         :log => Rails.env == 'development'
       }
     end
