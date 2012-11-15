@@ -23,7 +23,6 @@ module Crudify
         :use_class_name_as_title => false,
         :paginate => true,
         :sortable => true,
-        :searchable => true,
         :include => [],
 	:order => ({ position: :asc } if this_class.fields.keys.include?('position')),
         :conditions => '',
