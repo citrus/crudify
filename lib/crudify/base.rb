@@ -20,7 +20,7 @@ module Crudify
       this_class = class_name.constantize
       {
         :title_attribute => "title",
-        :use_class_name_as_title => false,
+        :use_class_name_as_title => true,
         :paginate => true,
         :sortable => true,
         :include => [],
