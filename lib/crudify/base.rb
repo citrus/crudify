@@ -25,7 +25,7 @@ module Crudify
         :sortable => true,
         :searchable => true,
         :include => [],
-	:order => ({ position: :asc } if this_class.fields.keys.include?('position'))
+	:order => ({ position: :asc } if this_class.fields.keys.include?('position')),
         :conditions => '',
         :search_conditions => '',
         :log => Rails.env == 'development'
