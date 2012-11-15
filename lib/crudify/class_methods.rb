@@ -41,6 +41,7 @@ module Crudify
          end
                   
          def index
+	   find_all_#{plural_name}
          end                      
           
          def show
