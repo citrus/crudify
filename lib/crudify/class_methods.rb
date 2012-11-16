@@ -108,7 +108,7 @@ module Crudify
   
          # Finds one single result based on the id params.
          def find_#{singular_name}
-           set_instance(#{class_name}.includes(#{options[:include]}).find(params[:id])
+           set_instance(#{class_name}.includes(#{options[:include]}).find(params[:id]))
          end
          
          
