@@ -5,6 +5,8 @@ A dynamic resource controller for Rails 3 that keeps your controllers nice and s
 
 Crudify was shamelessly robbed from [refinerycms](https://github.com/resolve/refinerycms/blob/master/core/lib/refinery/crud.rb)'s internals and customized for use in other projects. Much credit and many thanks to the guys at [resolve digital](http://resolvedigital.com/) for all their hard work on the [refinery cms project](http://resolvedigital.com/development/refinery%C2%A0cms). Keep it up!
 
+NOTE: While taken from RefineryCMS, please note that this plugin contains some additional functionality not present in RefineryCMS's version of `crudify`, so you'll probably want to refer to their documentation or source code for `crudify` if you're working on a RefineryCMS project.
+
 
 Installation
 ------------
