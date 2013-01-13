@@ -13,10 +13,12 @@ Installation
 
 It's best to install crudify by adding your Rails 3 project's Gemfile:
 
-    # Gemfile
-    source "http://rubygems.org"
-    gem 'rails',   '>= 3.0.0'
-    gem 'crudify', '>= 0.0.7'
+```ruby
+# Gemfile
+source "http://rubygems.org"
+gem 'rails',   '>= 3.0.0'
+gem 'crudify', '>= 0.0.7'
+```
 
 Now run:
 
@@ -28,23 +30,27 @@ Usage
 
 In its most basic form, crudify is designed to be use like this:
 
-    class JelliesController < ApplicationController
-      crudify :jelly
-    end
+```ruby
+class JelliesController < ApplicationController
+  crudify :jelly
+end
+```
 
 
 Ok, so what does it do? The short answer; _everything_ that you'd want it to. In more detail, crudify turns your controller into a full-fledged CRUD controller with `index`, `new`, `create`, `show`, `edit`, `update`, and `destroy`. But wait, there's more! Inside each of these standard methods are several _hook methods_ designed to make customizing your controllers even easier that overwriting crudify's methods. Overwriting; say what? ...
 
 Say you want to customize an action that's being defined by crudify, simply overwrite it!
 
-    class JelliesController < ApplicationController
-      crudify :jelly
+```ruby
+class JelliesController < ApplicationController
+  crudify :jelly
 
-      def create
-        @jelly = Jelly.new(params[:jelly])
-        # ... the rest of your custom action
-      end
-    end
+  def create
+    @jelly = Jelly.new(params[:jelly])
+    # ... the rest of your custom action
+  end
+end
+```
 
 
 Ok that seems easy enough, but what if my action is just a tiny bit different? That's where the _hook methods_ come in...
@@ -55,69 +61,77 @@ Laced into crudify's actions are a module full of methods designed to make custo
 
 Here's what lines #45-59 in `lib/crudify/class_methods.rb` will produce in our Jellies controller:
 
-    def create
-      # if the position field exists, set this object as last object, given the conditions of this class.
-      if Jelly.column_names.include?("position")
-        params[:jelly].merge!({
-          :position => ((Jelly.maximum(:position, :conditions => "")||-1) + 1)
-        })
-      end
-      @instance = @jelly = Jelly.new(params[:jelly])
-      before_create
-      if @instance.valid? && @instance.save
-        successful_create
-      else
-        failed_create
-      end
-    end
+```ruby
+def create
+  # if the position field exists, set this object as last object, given the conditions of this class.
+  if Jelly.column_names.include?("position")
+    params[:jelly].merge!({
+      :position => ((Jelly.maximum(:position, :conditions => "")||-1) + 1)
+    })
+  end
+  @instance = @jelly = Jelly.new(params[:jelly])
+  before_create
+  if @instance.valid? && @instance.save
+    successful_create
+  else
+    failed_create
+  end
+end
+```
 
 
 Just before the calls to `valid?` and `save`, you'll see `before_create`; the first hook method in the action. Looking further into the source, `before_create` is nothing more than a blank action, waiting to be overwritten:
 
-      def before_create
-        # just a hook!
-        puts "> Crud::before_create" if @crud_options[:log]
-        before_action
-      end
-
+```ruby
+def before_create
+  # just a hook!
+  puts "> Crud::before_create" if @crud_options[:log]
+  before_action
+end
+```
 
 Notice that `before_create` calls a second hook; `before_action`. This is a generic hook that fires before every crud method's call to `save`, `update` or `destroy`. This means it might be helpful for you to call `super` when overwriting this method so that the chain of hooks keeps firing. Inside the `before_action` method we'll decide what to use as flash messages with `set_what`. Here's the code for `before_action`:
 
-      def before_action
-        # just a hook!
-        puts "> Crud::before_action" if @crud_options[:log]
-        set_what
-        true
-      end
+```ruby
+def before_action
+  # just a hook!
+  puts "> Crud::before_action" if @crud_options[:log]
+  set_what
+  true
+end
+```
 
 
 *Ok Ok, so we're gettin' kind of deep here.* Let's get back to the basic concept; Skinny, sexy and easy on the eyes. (Are we still talking ruby here?)
 
 Here's an example of a `before_create` hook:
 
-    class InquiriesController < ApplicationController
-      crudify :inquiry
+```ruby
+class InquiriesController < ApplicationController
+  crudify :inquiry
 
-      def before_create
-        @inquiry.ip_address = request.remote_addr
-        super
-      end
+  def before_create
+    @inquiry.ip_address = request.remote_addr
+    super
+  end
 
-    end
+end
+```
 
 
 And a `successful_create` hook:
 
-    class InquiriesController < ApplicationController
-      crudify :inquiry
+```ruby
+class InquiriesController < ApplicationController
+  crudify :inquiry
 
-      def successful_create
-        InquiryMailer.message(@inquiry).deliver!
-        super
-      end
+  def successful_create
+    InquiryMailer.message(@inquiry).deliver!
+    super
+  end
 
-    end
-
+end
+```
 
 ### To find out more about crudify, read the source! Here's some helpful links:
 
@@ -154,7 +168,7 @@ There's a few things to be done still...
 License
 -------
 
-Although many things have been rewritten, crudify is released under [Resolve Digital's](http://www.resolvedigital.com) original license since portions code were extracted from their [refinerycms](http://github.com/resolve/refinerycms) project.
+Although many things have been rewritten, crudify is released under [Resolve Digital's](http://www.resolvedigital.com) original license since portions code were extracted from the [refinerycms](http://github.com/refinery/refinerycms) project.
 
 ### MIT License
 
