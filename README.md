@@ -5,7 +5,7 @@ A dynamic resource controller for Rails 3 that keeps your controllers nice and s
 
 Crudify was shamelessly robbed from [refinerycms](https://github.com/resolve/refinerycms/blob/master/core/lib/refinery/crud.rb)'s internals and customized for use in other projects. Much credit and many thanks to the guys at [resolve digital](http://resolvedigital.com/) for all their hard work on the [refinery cms project](http://resolvedigital.com/development/refinery%C2%A0cms). Keep it up!
 
-NOTE: While taken from RefineryCMS, please note that this plugin contains some additional functionality not present in RefineryCMS's version of `crudify`, so you'll probably want to refer to their documentation or source code for `crudify` if you're working on a RefineryCMS project.
+NOTE: While taken from Refinery CMS, please note that this plugin contains some additional functionality not present in Refinery CMS's version of `crudify`, so you'll probably want to refer to their documentation or source code for `crudify` if you're working on a Refinery CMS project.
 
 
 Installation
@@ -15,13 +15,13 @@ It's best to install crudify by adding your Rails 3 project's Gemfile:
 
     # Gemfile
     source "http://rubygems.org"
-    gem 'rails',   '>= 3.0.0'        
+    gem 'rails',   '>= 3.0.0'
     gem 'crudify', '>= 0.0.7'
 
 Now run:
 
     bundle install
-    
+
 
 Usage
 -----
@@ -31,21 +31,21 @@ In its most basic form, crudify is designed to be use like this:
     class JelliesController < ApplicationController
       crudify :jelly
     end
-    
-    
-Ok, so what does it do? The short answer; _everything_ that you'd want it to. In more detail, crudify turns your controller into a full-fledged CRUD controller with `index`, `new`, `create`, `show`, `edit`, `update`, and `destroy`. But wait, there's more! Inside each of these standard methods are several _hook methods_ designed to make customizing your controllers even easier that overwriting crudify's methods. Overwriting; say what? ... 
+
+
+Ok, so what does it do? The short answer; _everything_ that you'd want it to. In more detail, crudify turns your controller into a full-fledged CRUD controller with `index`, `new`, `create`, `show`, `edit`, `update`, and `destroy`. But wait, there's more! Inside each of these standard methods are several _hook methods_ designed to make customizing your controllers even easier that overwriting crudify's methods. Overwriting; say what? ...
 
 Say you want to customize an action that's being defined by crudify, simply overwrite it!
 
     class JelliesController < ApplicationController
       crudify :jelly
-      
-      def create     
+
+      def create
         @jelly = Jelly.new(params[:jelly])
         # ... the rest of your custom action
       end
     end
-    
+
 
 Ok that seems easy enough, but what if my action is just a tiny bit different? That's where the _hook methods_ come in...
 
@@ -70,7 +70,7 @@ Here's what lines #45-59 in `lib/crudify/class_methods.rb` will produce in our J
         failed_create
       end
     end
-    
+
 
 Just before the calls to `valid?` and `save`, you'll see `before_create`; the first hook method in the action. Looking further into the source, `before_create` is nothing more than a blank action, waiting to be overwritten:
 
@@ -79,7 +79,7 @@ Just before the calls to `valid?` and `save`, you'll see `before_create`; the fi
         puts "> Crud::before_create" if @crud_options[:log]
         before_action
       end
-      
+
 
 Notice that `before_create` calls a second hook; `before_action`. This is a generic hook that fires before every crud method's call to `save`, `update` or `destroy`. This means it might be helpful for you to call `super` when overwriting this method so that the chain of hooks keeps firing. Inside the `before_action` method we'll decide what to use as flash messages with `set_what`. Here's the code for `before_action`:
 
@@ -89,33 +89,33 @@ Notice that `before_create` calls a second hook; `before_action`. This is a gene
         set_what
         true
       end
-      
 
-*Ok Ok, so we're gettin' kind of deep here.* Let's get back to the basic concept; Skinny, sexy and easy on the eyes. (Are we still talking ruby here?) 
+
+*Ok Ok, so we're gettin' kind of deep here.* Let's get back to the basic concept; Skinny, sexy and easy on the eyes. (Are we still talking ruby here?)
 
 Here's an example of a `before_create` hook:
 
     class InquiriesController < ApplicationController
       crudify :inquiry
-      
+
       def before_create
         @inquiry.ip_address = request.remote_addr
         super
       end
-      
+
     end
-      
+
 
 And a `successful_create` hook:
 
     class InquiriesController < ApplicationController
       crudify :inquiry
-      
+
       def successful_create
         InquiryMailer.message(@inquiry).deliver!
         super
       end
-      
+
     end
 
 
@@ -136,7 +136,7 @@ Shoulda and Capybara/Selenium tests can be run by cloning the repo and running `
     git clone git://github.com/citrus/crudify.git
     cd crudify
     bundle install
-    rake    
+    rake
 
 
 To Do
@@ -157,19 +157,19 @@ License
 Although many things have been rewritten, crudify is released under [Resolve Digital's](http://www.resolvedigital.com) original license since portions code were extracted from their [refinerycms](http://github.com/resolve/refinerycms) project.
 
 ### MIT License
- 
+
 Copyright (c) 2005-2010 [Resolve Digital](http://www.resolvedigital.com)
- 
+
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
- 
+
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
- 
+
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
