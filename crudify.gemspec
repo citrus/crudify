@@ -19,8 +19,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency('rails',         '>= 3.0.0')
-	s.add_dependency('will_paginate', '>= 2.3.15')
-  s.add_dependency('meta_search',   '>= 1.0.1')
+  s.add_dependency('kaminari')
   
 	s.add_development_dependency('shoulda', '>= 2.11.3')
 	s.add_development_dependency('sqlite3-ruby', '>= 1.3.3')
